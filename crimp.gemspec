@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = 'crimp'
-  spec.version       = '1.0.0'
+  spec.version       = '1.1.0'
   spec.authors       = ['BBC News']
   spec.email         = ['D&ENewsFrameworksTeam@bbc.co.uk']
   spec.summary       = 'Creates an MD5 hash from simple data structures.'
