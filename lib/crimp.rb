@@ -6,8 +6,8 @@ require 'deepsort'
 
 class Crimp
   class << self
-    def signature(obj)
-      Digest::MD5.hexdigest(notation(obj))
+    def signature(obj, digest_class=Digest::MD5)
+      digest_class.hexdigest(notation(obj))
     end
 
     def notation(obj)

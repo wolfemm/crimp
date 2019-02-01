@@ -6,6 +6,18 @@ describe '.signature' do
   it 'will return an md5 hash' do
     expect(Crimp.signature('a')).to eq 'd132c0567a5964930f9ee5f14e779e32'
   end
+
+  it 'will return a sha1 hash when instructed to' do
+    expect(Crimp.signature('a', Digest::SHA1)).to eq '1e4b66abe83a478d0e271bede40afd89c9519134'
+  end
+
+  it 'will return a sha2 hash when instructed to' do
+    expect(Crimp.signature('a', Digest::SHA2)).to eq '81c99b3df1d89a5d4cc5bdbd8b90f3ec39e448164f410d1884811405e4247dca'
+  end
+
+  it 'will return a sha512 hash when instructed to' do
+    expect(Crimp.signature('a', Digest::SHA512)).to eq 'b075959d199f0c84323ea8449e1a8c860894a328f0ecddf9d1be1576e8f2d288564309df4dc3677ae8a18df63f28a544bb6e9f8592633c6c42035d526ffecddc'
+  end
 end
 
 describe '.notation' do
