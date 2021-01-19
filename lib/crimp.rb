@@ -5,6 +5,15 @@ require 'set'
 require 'deepsort'
 
 class Crimp
+  module TypeFlag
+    BOOL = "B"
+    NIL = "_"
+    STRING = "S"
+    NUMERIC = "N"
+    ARRAY = "A"
+    HASH = "H"
+  end
+
   class << self
     def signature(obj, digest_class=Digest::MD5)
       digest_class.hexdigest(notation(obj))
@@ -19,17 +28,19 @@ class Crimp
 
       case obj
       when String
-        [obj, 'S']
+        [obj, TypeFlag::STRING]
       when Numeric
-        [obj, 'N']
-      when TrueClass, FalseClass
-        [obj, 'B']
+        [obj, TypeFlag::NUMERIC]
+      when TrueClass
+        [true, TypeFlag::BOOL].freeze
+      when FalseClass
+        [false, TypeFlag::BOOL].freeze
       when NilClass
-        [nil, '_']
+        [nil, TypeFlag::NIL].freeze
       when Array
-        [sort(obj), 'A']
+        [sort(obj), TypeFlag::ARRAY]
       when Hash
-        [sort(obj), 'H']
+        [sort(obj), TypeFlag::HASH]
       else
         raise TypeError, "Expected a (String|Number|Boolean|Nil|Hash|Array), Got #{obj.class}."
       end
