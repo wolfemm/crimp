@@ -32,11 +32,11 @@ class Crimp
       when Numeric
         [obj, TypeFlag::NUMERIC]
       when TrueClass
-        [true, TypeFlag::BOOL].freeze
+        @_annotated_true ||= [true, TypeFlag::BOOL].freeze
       when FalseClass
-        [false, TypeFlag::BOOL].freeze
+        @_annotated_false ||= [false, TypeFlag::BOOL].freeze
       when NilClass
-        [nil, TypeFlag::NIL].freeze
+        @_annotated_nil ||= [nil, TypeFlag::NIL].freeze
       when Array
         [sort(obj), TypeFlag::ARRAY]
       when Hash
